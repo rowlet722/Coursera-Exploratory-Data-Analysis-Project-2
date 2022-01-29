@@ -3,7 +3,9 @@ library(dplyr)
 NEI <- readRDS("summarySCC_PM25.rds")
 SCC <- readRDS("Source_Classification_Code.rds")
 
-idx <- grep("coal",SCC$EI.Sector,ignore.case = TRUE)
+idxComb <- grep("combustion",SCC$SCC.Level.One,ignore.case = TRUE)
+idxCoal <- grep("coal",SCC$SCC.Level.Three,ignore.case = TRUE)
+idx <- intersect(idxComb,idxCoal)
 coalSources <- SCC$SCC[idx]
 coalData <- filter(NEI,SCC %in% coalSources)
 

@@ -3,7 +3,7 @@ library(dplyr)
 NEI <- readRDS("summarySCC_PM25.rds")
 SCC <- readRDS("Source_Classification_Code.rds")
 
-idx <- grep("ICE",SCC$EI.Sector,ignore.case = TRUE)
+idx <- grep("vehicle",SCC$SCC.Level.Two,ignore.case = T)
 MVsources <- SCC$SCC[idx]
 MVData <- filter(NEI,SCC %in% MVsources,fips == "24510")
 
